@@ -8,7 +8,7 @@ follows it matches the reference output bar for bar on the shared test cases.
 TD Sequential is a method published by Tom DeMark. This is an independent
 description of one concrete, fully specified variant of it, not DeMark's text.
 
-Not included: perfection, TD Combo, risk levels, and the "true high / true low"
+Not included: TD Combo, risk levels, and the "true high / true low"
 variants of the support and resistance levels. Nothing here is trading advice.
 
 ## Input
@@ -180,6 +180,12 @@ One record per input bar, in input order:
 | support | number or null | price of the active latest support level |
 | buyDeferred | boolean | true on a bar where the buy countdown was held at -12 by the 13-versus-8 test |
 | sellDeferred | boolean | same for the sell countdown |
+| buyPerfected | boolean | true only on a buy setup 9 bar whose bar 8 or bar 9 low is strictly below both the bar 6 low and the bar 7 low (bars numbered 1 to 9 within the setup) |
+| sellPerfected | boolean | true only on a sell setup 9 bar whose bar 8 or bar 9 high is strictly above both the bar 6 high and the bar 7 high |
+| bullishFlip | boolean | true when the previous bar closed below the close 4 bars before it and this bar closes above the close 4 bars earlier (needs 5 earlier bars) |
+| bearishFlip | boolean | the mirror: previous close above its 4-bars-earlier close, this close below its 4-bars-earlier close |
+
+The four fields above are information only. They never change a setup, countdown or level value, and a setup does not need a flip to start.
 
 Notes for implementers:
 

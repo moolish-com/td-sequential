@@ -35,7 +35,9 @@ const reported = (list) => {
 /**
  * Compute one record per bar:
  * { t, buySetup, sellSetup, buyCountdown, sellCountdown,
- *   resistance, support, buyDeferred, sellDeferred }
+ *   resistance, support, buyDeferred, sellDeferred,
+ *   buyPerfected, sellPerfected, bullishFlip, bearishFlip }
+ * The last four are information only; they never change a count.
  */
 export function computeTdSequential(bars) {
   const out = [];
@@ -74,9 +76,17 @@ export function computeTdSequential(bars) {
       qualifies: i >= 2 && c >= h2, test: h >= sell.eightClose, close: c,
     });
 
+    // Perfection, on the setup-9 bar: bar 8 or 9 goes beyond bars 6 and 7 (strictly).
+    const buyPerfected = buy9 && Math.min(bars[i - 1].l, l) < Math.min(bars[i - 3].l, bars[i - 2].l);
+    const sellPerfected = sell9 && Math.max(bars[i - 1].h, h) > Math.max(bars[i - 3].h, bars[i - 2].h);
+    // Price flip: the close-versus-close-4-bars-earlier comparison changes side.
+    const bullishFlip = i >= 5 && bars[i - 1].c < bars[i - 5].c && c > bars[i - 4].c;
+    const bearishFlip = i >= 5 && bars[i - 1].c > bars[i - 5].c && c < bars[i - 4].c;
+
     out.push({
       t, buySetup, sellSetup, buyCountdown: b.value, sellCountdown: s.value,
       resistance, support, buyDeferred: b.deferred, sellDeferred: s.deferred,
+      buyPerfected, sellPerfected, bullishFlip, bearishFlip,
     });
   }
   return out;

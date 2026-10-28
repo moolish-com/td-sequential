@@ -1,14 +1,28 @@
 {
-  "name": "td-sequential-count",
+  "name": "td-sequential",
   "version": "1.0.0",
-  "description": "Independent, dependency-free TD Sequential setup, countdown and support/resistance counter.",
+  "description": "TD Sequential indicator for JavaScript and TypeScript: TD9 setup, countdown 13, TDST levels, perfection and price flips on OHLC candles. Tested, zero dependencies.",
   "type": "module",
   "main": "src/td-sequential.js",
-  "exports": "./src/td-sequential.js",
-  "files": ["src", "SPEC.md", "README.md", "LICENSE"],
+  "types": "src/td-sequential.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/td-sequential.d.ts",
+      "default": "./src/td-sequential.js"
+    }
+  },
+  "files": ["src", "SPEC.md", "README.md", "LICENSE", "CHANGELOG.md"],
   "scripts": { "test": "node --test" },
-  "keywords": ["td-sequential", "technical-analysis", "trading", "indicator", "countdown", "setup"],
+  "keywords": [
+    "td-sequential", "tdsequential", "td9", "td-setup", "td-countdown", "tdst", "tom-demark", "demark",
+    "technical-analysis", "technical-indicators", "trading", "indicator", "crypto", "cryptocurrency",
+    "bitcoin", "stocks", "forex", "ohlc", "candlestick", "typescript"
+  ],
+  "author": "Moolish <support@moolish.com> (https://moolish.com)",
   "license": "MIT",
   "homepage": "https://moolish.com/tools/td-sequential-counter/",
-  "engines": { "node": ">=20" }
+  "repository": { "type": "git", "url": "git+https://github.com/moolish-com/td-sequential.git" },
+  "bugs": { "url": "https://github.com/moolish-com/td-sequential/issues" },
+  "sideEffects": false,
+  "engines": { "node": ">=18" }
 }

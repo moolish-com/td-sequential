@@ -142,6 +142,7 @@ test('output carries the bar timestamp and the exact contract fields', () => {
   assert.deepEqual(Object.keys(r[0]), [
     't', 'buySetup', 'sellSetup', 'buyCountdown', 'sellCountdown',
     'resistance', 'support', 'buyDeferred', 'sellDeferred',
+    'buyPerfected', 'sellPerfected', 'bullishFlip', 'bearishFlip',
   ]);
   assert.deepEqual(col(r, 't'), [1000, 2000, 3000]);
   assert.deepEqual(computeTdSequential([]), []);
@@ -171,6 +172,30 @@ for (const name of readdirSync(FIXTURES).filter((f) => f.endsWith('.json'))) {
     const fx = JSON.parse(readFileSync(new URL(name, FIXTURES), 'utf8'));
     const got = computeTdSequential(fx.bars);
     assert.equal(got.length, fx.expected.length);
-    for (let i = 0; i < got.length; i++) assert.deepEqual(got[i], fx.expected[i], `bar ${i}`);
+    // Fixtures hold the counting fields; the information-only flags are tested above.
+    const pick = (r, keys) => Object.fromEntries(keys.map((k) => [k, r[k]]));
+    for (let i = 0; i < got.length; i++) assert.deepEqual(pick(got[i], Object.keys(fx.expected[i])), fx.expected[i], `bar ${i}`);
   });
 }
+
+test('perfection: a buy 9 is perfected when bar 8 or 9 undercuts the lows of bars 6 and 7', () => {
+  const input = bars([100, 100, 100, 100, ...falling(9, 99)]);
+  const r = computeTdSequential(input);
+  const nine = r.findIndex((x) => x.buySetup === 9);
+  assert.equal(r[nine].buyPerfected, true);
+  // Lift bars 8 and 9 above bar 6's and 7's lows: the 9 still prints, unperfected.
+  const flat = input.map((b, i) => (i >= nine - 1 && i <= nine ? { ...b, l: input[nine - 3].l + 5, h: b.h + 6 } : b));
+  const r2 = computeTdSequential(flat);
+  assert.equal(r2[nine].buySetup, 9);
+  assert.equal(r2[nine].buyPerfected, false);
+  assert.ok(r.every((x, i) => i === nine || !x.buyPerfected));
+});
+
+test('price flips mark the change of side and never change a count', () => {
+  const r = computeTdSequential(bars([10, 10, 10, 10, 10, 11, 9, 8, 7, 6]));
+  // bar 6 closes above bar 2 (11 > 10) is followed by bar 7 closing below bar 3 (9 < 10)
+  assert.equal(r[6].bearishFlip, true);
+  assert.equal(r[6].bullishFlip, false);
+  const up = computeTdSequential(bars([10, 10, 10, 10, 10, 9, 11, 12]));
+  assert.equal(up[6].bullishFlip, true);
+});

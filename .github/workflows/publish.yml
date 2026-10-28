@@ -1,0 +1,21 @@
+name: publish
+# Publishes to npm with trusted publishing (OIDC): no token is stored anywhere.
+# npmjs.com > package settings > Trusted publisher: GitHub Actions, moolish-com/td-sequential, publish.yml
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest
+      - run: npm test
+      - run: npm publish --provenance --access public
