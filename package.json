@@ -1,6 +1,6 @@
 {
   "name": "td-sequential-indicator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TD Sequential indicator for JavaScript and TypeScript: TD9 setup, countdown 13, TDST levels, perfection and price flips on OHLC candles. Tested, zero dependencies.",
   "type": "module",
   "main": "src/td-sequential.js",

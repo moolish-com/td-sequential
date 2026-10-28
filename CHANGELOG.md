@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (2026-10-28)
+
+- Published from GitHub Actions with npm provenance. No change to the counting.
+
 ## 1.0.0 (2026-10-28)
 
 - First release: TD Setup (TD9), TD Countdown 13 with the 13-versus-8 deferral, TDST support and resistance levels.
