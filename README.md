@@ -1,23 +1,23 @@
 # TD Sequential indicator for JavaScript and TypeScript
 
 [![test](https://github.com/moolish-com/td-sequential/actions/workflows/test.yml/badge.svg)](https://github.com/moolish-com/td-sequential/actions/workflows/test.yml)
-[![npm](https://img.shields.io/npm/v/td-sequential.svg)](https://www.npmjs.com/package/td-sequential)
+[![npm](https://img.shields.io/npm/v/td-sequential-indicator.svg)](https://www.npmjs.com/package/td-sequential-indicator)
 [![licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-`td-sequential` computes Tom DeMark's TD Sequential indicator on OHLC candles: the TD Setup (the 1 to 9 count, often called TD9), the TD Countdown (1 to 13, with the 13-versus-8 deferral), the TDST support and resistance levels, plus information-only flags for a perfected setup and a price flip. It has no dependencies, ships TypeScript types, runs in Node and in the browser, and works on crypto, stocks, forex or any other candles.
+`td-sequential-indicator` computes Tom DeMark's TD Sequential indicator on OHLC candles: the TD Setup (the 1 to 9 count, often called TD9), the TD Countdown (1 to 13, with the 13-versus-8 deferral), the TDST support and resistance levels, plus information-only flags for a perfected setup and a price flip. It has no dependencies, ships TypeScript types, runs in Node and in the browser, and works on crypto, stocks, forex or any other candles.
 
 It powers the free [TD Sequential counter](https://moolish.com/tools/td-sequential-counter/): check the current 9 and 13 on any crypto pair in your browser, nothing to install.
 
 ## Install
 
 ```sh
-npm install td-sequential
+npm install td-sequential-indicator
 ```
 
 ## Usage
 
 ```js
-import { computeTdSequential, latest } from 'td-sequential';
+import { computeTdSequential, latest } from 'td-sequential-indicator';
 
 // Closed bars only, oldest first. Drop the candle that is still forming.
 const bars = [{ t: 1750032000000, o: 105594, h: 108952, l: 104980, c: 106794 } /* ... */];
