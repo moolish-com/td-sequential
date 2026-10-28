@@ -1,0 +1,14 @@
+{
+  "name": "td-sequential-count",
+  "version": "1.0.0",
+  "description": "Independent, dependency-free TD Sequential setup, countdown and support/resistance counter.",
+  "type": "module",
+  "main": "src/td-sequential.js",
+  "exports": "./src/td-sequential.js",
+  "files": ["src", "SPEC.md", "README.md", "LICENSE"],
+  "scripts": { "test": "node --test" },
+  "keywords": ["td-sequential", "technical-analysis", "trading", "indicator", "countdown", "setup"],
+  "license": "MIT",
+  "homepage": "https://moolish.com/tools/td-sequential-counter/",
+  "engines": { "node": ">=20" }
+}
