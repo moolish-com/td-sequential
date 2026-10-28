@@ -1,8 +1,16 @@
-# td-sequential-count
+# TD Sequential indicator for JavaScript
 
-A small, dependency-free JavaScript library that counts the TD Sequential indicator on a list of candles: the Setup (buy and sell 1 to 9), the Countdown (1 to 13), and the support and resistance levels created by completed setups. It is an independent implementation of one fully specified variant, about 110 lines, written from the plain-English rules in [SPEC.md](SPEC.md).
+`td-sequential-count` computes the TD Sequential indicator on a list of OHLC candles: the TD Setup (the 1 to 9 count, often called TD9), the TD Countdown (1 to 13) and the support and resistance levels left by completed setups. It has no dependencies, runs in Node and in the browser, and is about 110 lines written from the plain-English rules in [SPEC.md](SPEC.md), with tests.
 
-Try it in the browser, no install: <https://moolish.com/tools/td-sequential-counter/>. The background article is at <https://moolish.com/learn/td-sequential/>.
+It powers the free [TD Sequential counter](https://moolish.com/tools/td-sequential-counter/) on moolish.com, where you can check the current count on a crypto pair without installing anything.
+
+## What is TD Sequential?
+
+TD Sequential is Tom DeMark's method for spotting a stretched run of closes. A setup counts consecutive bars that close beyond the close four bars earlier; a completed 9 can start a countdown that needs 13 qualifying bars. A 9 or a 13 describes past prices and gives no direction on its own. A longer explanation is in the [TD Sequential guide](https://moolish.com/learn/td-sequential/).
+
+## Install
+
+There is no package to install. Copy `src/td-sequential.js` into your project, or clone this repository, and import it as an ES module.
 
 ## Usage
 
